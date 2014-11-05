@@ -1,17 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Titre de la page</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<div id="board">
 
-	</div>
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	  <title>Solitaire</title>
+	  <meta name="description" content="#" />
+	  <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+	  <link rel="stylesheet" href="css/style.css">
+	</head>
 
-    <script type="text/javascript" src="js/model.js"></script>
-    <script type="text/javascript" src="js/UI.js"></script>
-    <script type="text/javascript" src="js/solitaire.js"></script>
-</body>
+	<body>
+		<header>
+			<h1>Solitaire</h1>
+			<img width="30" src="img/logo.png">
+			<a href=''>Restart</a>
+		</header>
+		<section>
+			<p>Vous n'avez plus la possibilité de jouer. Retentez votre chance en cliquant sur le bouton "Restart".</p>
+		</section>
+		<div id="board">	
+
+			<div id="top">
+				<div id="stack" class="cards">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+					<img class="card" src="img/cards/back.png">
+				</div>
+				<div id="pioche" class="cards">
+				</div>
+
+				<div id="family">
+					<div class="cards">
+						<img class="card" src="img/cards/t1.jpg">
+					</div>
+					<div class="cards">
+						<img class="card" src="img/cards/k1.jpg">
+					</div>
+					<div class="cards">
+						<img class="card" src="img/cards/p1.jpg">
+					</div>
+					<div class="cards">
+						<img class="card" src="img/cards/c1.jpg">
+					</div>
+				</div>
+			</div>
+			
+			<div id="tapis">
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/t4.jpg">
+					<img class="card nextTurn" src="img/cards/c3.jpg">
+					<img class="card nextTurn" src="img/cards/p2.jpg">
+				</div>
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/t11.jpg">
+					<img class="card nextTurn" src="img/cards/k10.jpg">
+					<img class="card nextTurn" src="img/cards/p9.jpg">
+					<img class="card nextTurn" src="img/cards/k8.jpg">
+					<img class="card nextTurn" src="img/cards/t7.jpg">
+				</div>
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/t8.jpg">
+					<img class="card nextTurn" src="img/cards/c7.jpg">
+					<img class="card nextTurn" src="img/cards/p6.jpg">
+					<img class="card nextTurn" src="img/cards/k5.jpg">
+				</div>
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/c13.jpg">
+					<img class="card nextTurn" src="img/cards/t12.jpg">
+					<img class="card nextTurn" src="img/cards/k11.jpg">
+					<img class="card nextTurn" src="img/cards/p10.jpg">
+				</div>
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/p12.jpg">
+					<img class="card nextTurn" src="img/cards/c11.jpg">
+					<img class="card nextTurn" src="img/cards/t10.jpg">
+					<img class="card nextTurn" src="img/cards/k9.jpg">
+				</div>
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/p8.jpg">
+					<img class="card nextTurn" src="img/cards/k7.jpg">
+					<img class="card nextTurn" src="img/cards/t6.jpg">
+					<img class="card nextTurn" src="img/cards/c5.jpg">
+				</div>
+
+				<div class="cards droppable">
+					<img class="card" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card next" src="img/cards/back.png">
+					<img class="card nextTurn" src="img/cards/k8.jpg">
+					<img class="card nextTurn" src="img/cards/t7.jpg">
+					<img class="card nextTurn" src="img/cards/c6.jpg">
+					<img class="card nextTurn" src="img/cards/t5.jpg">
+				</div>  
+
+			</div>
+		</div>
+
+		<!-- Scripts JS - Fonctionnement du Solitaire -->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+    	<!--<script type="text/javascript" src="solitaire.js"></script>
+    	<script type="text/javascript" src="model.js"></script>
+    	<script type="text/javascript" src="UI.js"></script>-->
+
+	</body>
+
 </html>
