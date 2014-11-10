@@ -59,5 +59,15 @@ var UI = {
         cardTop.setAttribute('src','img/cards/'+family+valor+'.jpg');
         var pioche = document.getElementById('pioche');
         pioche.appendChild(cardTop);
+    },
+    clickEvent : function(self){
+        self.classList.add('focus');   
+    },
+    
+    moveCard : function(previousCard, secondCard){
+        console.log(secondCard.parentNode);
+        console.log(previousCard);
+        secondCard.parentNode.appendChild(previousCard);
+        
     }
 };
