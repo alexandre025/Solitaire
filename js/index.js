@@ -1,6 +1,5 @@
 'use strict';
 
-
 //Placer les cartes
 
 var cards = document.getElementById('tapis').getElementsByClassName('cards');

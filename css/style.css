@@ -139,7 +139,7 @@ section p{
 	position: relative;
 }
 
-#stack img{
+#stack img, #pioche img{
 	position: absolute;
 }
 
