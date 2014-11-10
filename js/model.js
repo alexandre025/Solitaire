@@ -49,6 +49,13 @@ var model = {
 		};
 
 		callback.call(this);
-	}
+	},
+    
+    isStackEmpty : function(callback){
+        var stack = document.querySelector('#stack img');
+        if(!stack){
+            callback.call(this);
+        }
+    }
 
 };
