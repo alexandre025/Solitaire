@@ -176,7 +176,7 @@ section p{
 	position: absolute;
 }
 
-.card:hover{
+.focus{
 	box-shadow: 0 0 45px rgba(162, 142, 61, 1);	
 }
 
