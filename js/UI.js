@@ -16,6 +16,7 @@ var UI = {
                     }
                     else {
                         newCard.setAttribute('src','img/cards/'+family+valor+'.jpg');
+                        newCard.classList.add('draggable');
                     }
                     newCard.setAttribute('data-family',family);
                     newCard.setAttribute('data-valor',valor);
@@ -57,6 +58,7 @@ var UI = {
         console.log(cardTop);
         document.getElementById('stack').removeChild(cardTop);
         cardTop.setAttribute('src','img/cards/'+family+valor+'.jpg');
+        cardTop.classList.add('draggable');
         var pioche = document.getElementById('pioche');
         pioche.appendChild(cardTop);
     },
