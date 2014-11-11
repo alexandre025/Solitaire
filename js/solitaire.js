@@ -54,7 +54,17 @@ var solitaire = {
         */
     },
     dragAndDrop : function(){
-        $('.draggable').draggable();
+        $('.draggable').draggable({
+            revert : 'invalid',
+            cancel : '#pioche',
+            zIndex : 100
+        });
+        $('.stackList img:last-of-type').droppable({
+            accept : '.draggable',
+            drop : function(){
+                alert('drop ok');
+            }
+        });
     }
 }
 solitaire.init();
