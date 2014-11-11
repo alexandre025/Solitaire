@@ -27,7 +27,9 @@ var solitaire = {
                 UI.initDeck(deck);
             });
             UI.clickStack();
+            solitaire.dragAndDrop(); // Une nouvelle carte tiré, ajout du drag&drop
         },false);  
+        solitaire.dragAndDrop(); // Initialisation du drag&drop
 /*
         var cliquableCards = document.querySelectorAll('.stackList > img, #family > .card');
         var selectedFamily = null, selectedValor = null, previousCard = null;
@@ -50,6 +52,9 @@ var solitaire = {
             },false);
         };
         */
+    },
+    dragAndDrop : function(){
+        $('.draggable').draggable();
     }
 }
 solitaire.init();
