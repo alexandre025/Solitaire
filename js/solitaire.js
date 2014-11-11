@@ -59,14 +59,35 @@ var solitaire = {
             zIndex : 100
         });
         
-        function droppableElement(elem){
+        function droppableStackList(elem){
             elem.droppable({ // Ici on ne drop que sur les dernieres cartes des stacks
-                accept : '.draggable', // Remplacer ici par la fonction qui test la carté draggé et la carte droppé
+                accept : function(dragged){
+                    var dragged = dragged[0];
+                    
+                    var isReturned = this.getAttribute('src').split('/');
+                    isReturned = isReturned[isReturned.length-1];
+                    
+                    if(isReturned != 'back.png'){
+                        var previousFamily = dragged.getAttribute('data-family');
+                        var previousValor = dragged.getAttribute('data-valor');
+                        var family = this.getAttribute('data-family');
+                        var valor = this.getAttribute('data-valor');
+                        if(((previousFamily == 'p' || previousFamily == 't')&&(family == 'k' || family == 'c'))||(((previousFamily == 'k' || previousFamily == 'c')&&(family == 't' || family == 'p')))){
+                            console.log('color OK');
+                            if(parseInt(previousValor)+1 == parseInt(valor)){
+                                console.log('move OK');
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                    else { return true; }
+                },
                 drop : function(event,ui){
                     var movedCard = ui.draggable[0]; // Bybebye Jquery
 
                     // La nouvelle derniere carte de l'ancien emplacement devient dropable
-                    droppableElement(ui.draggable.prev());
+                    droppableStackList(ui.draggable.prev());
                     // L'ancienne derniere carte du nouvel emplacement devient dropable
                     $(this).droppable('destroy');
 
@@ -74,22 +95,11 @@ var solitaire = {
                     movedCard.remove();
                     movedCard = this.parentNode.appendChild(movedCard);
                     var top = this.parentNode.childElementCount;
-                    var cards = document.getElementById('tapis').getElementsByClassName('cards');
-                    for (var i = 0; i < cards.length; i++) {
-                       var card = cards[i].getElementsByTagName('img');
-                       var cpt = 0;
-                       for (var j = 0; j < card.length; j++) {
-                          card[j].style.cssText='';
-                          card[j].style.top = cpt+"px";	
-                          cpt = cpt + 20;
-                       };
-                    };
-
-
+                    UI.setCardsPosition();
                 }
             });
         }
-        droppableElement($('.stackList img:last-of-type'));
+        droppableStackList($('.stackList img:last-of-type'));
     }
 }
 solitaire.init();
