@@ -56,15 +56,40 @@ var solitaire = {
     dragAndDrop : function(){
         $('.draggable').draggable({
             revert : 'invalid',
-            cancel : '#pioche',
             zIndex : 100
         });
-        $('.stackList img:last-of-type').droppable({
-            accept : '.draggable',
-            drop : function(){
-                alert('drop ok');
-            }
-        });
+        
+        function droppableElement(elem){
+            elem.droppable({ // Ici on ne drop que sur les dernieres cartes des stacks
+                accept : '.draggable', // Remplacer ici par la fonction qui test la carté draggé et la carte droppé
+                drop : function(event,ui){
+                    var movedCard = ui.draggable[0]; // Bybebye Jquery
+
+                    // La nouvelle derniere carte de l'ancien emplacement devient dropable
+                    droppableElement(ui.draggable.prev());
+                    // L'ancienne derniere carte du nouvel emplacement devient dropable
+                    $(this).droppable('destroy');
+
+
+                    movedCard.remove();
+                    movedCard = this.parentNode.appendChild(movedCard);
+                    var top = this.parentNode.childElementCount;
+                    var cards = document.getElementById('tapis').getElementsByClassName('cards');
+                    for (var i = 0; i < cards.length; i++) {
+                       var card = cards[i].getElementsByTagName('img');
+                       var cpt = 0;
+                       for (var j = 0; j < card.length; j++) {
+                          card[j].style.cssText='';
+                          card[j].style.top = cpt+"px";	
+                          cpt = cpt + 20;
+                       };
+                    };
+
+
+                }
+            });
+        }
+        droppableElement($('.stackList img:last-of-type'));
     }
 }
 solitaire.init();

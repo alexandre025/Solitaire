@@ -25,16 +25,20 @@ var UI = {
                 
              }; 
         };
+        UI.setCardsPosition();
+	},
+    setCardsPosition : function(){
         var cards = document.getElementById('tapis').getElementsByClassName('cards');
         for (var i = 0; i < cards.length; i++) {
-	       var card = cards[i].getElementsByTagName('img');
-	       var cpt = 0;
-	       for (var j = 0; j < card.length; j++) {
-		      card[j].style.top = cpt+"px";	
-		      cpt = cpt + 20;
-	       };
-        };
-	},
+            var card = cards[i].getElementsByTagName('img');
+            var cpt = 0;
+            for (var j = 0; j < card.length; j++) {
+                card[j].style.cssText='';
+                card[j].style.top = cpt+"px";	
+                cpt = cpt + 20;
+           };
+        };        
+    },
     initDeck : function(deck){
         var family, valor, newCard;
         var pioche = document.getElementById('pioche');
