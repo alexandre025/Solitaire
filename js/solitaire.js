@@ -27,9 +27,10 @@ var solitaire = {
                 UI.initDeck(deck);
             });
             UI.clickStack();
-            solitaire.dragAndDrop(); // Une nouvelle carte tiré, ajout du drag&drop
+            solitaire.dragAndDrop(deck); // Une nouvelle carte tiré, ajout du drag&drop
         },false);  
-        solitaire.dragAndDrop(); // Initialisation du drag&drop
+        solitaire.dragAndDrop(deck); // Initialisation du drag&drop
+
 /*
         var cliquableCards = document.querySelectorAll('.stackList > img, #family > .card');
         var selectedFamily = null, selectedValor = null, previousCard = null;
@@ -53,11 +54,32 @@ var solitaire = {
         };
         */
     },
-    dragAndDrop : function(){
+    dragAndDrop : function(deck){
         $('.draggable').draggable({
             revert : 'invalid',
             zIndex : 100
         });
+        function droppableEmptyStack(elem){
+            elem.droppable({
+                accept : '.draggable',
+                drop : function(event,ui){
+                    $(this).droppable('destroy');
+                    var movedCard = ui.draggable[0];
+                    
+                    if(movedCard.previousElementSibling){
+                        droppableStackList(ui.draggable.prev());
+                    }
+                    else{
+                        droppableEmptyStack(ui.draggable.parent());
+                    }
+                    
+                    movedCard.remove();
+                    movedCard = this.appendChild(movedCard);
+                    var top = this.parentNode.childElementCount;
+                    UI.setCardsPosition();
+                }
+            });
+        }
         
         function droppableStackList(elem){
             elem.droppable({ // Ici on ne drop que sur les dernieres cartes des stacks
@@ -73,22 +95,40 @@ var solitaire = {
                         var family = this.getAttribute('data-family');
                         var valor = this.getAttribute('data-valor');
                         if(((previousFamily == 'p' || previousFamily == 't')&&(family == 'k' || family == 'c'))||(((previousFamily == 'k' || previousFamily == 'c')&&(family == 't' || family == 'p')))){
-                            console.log('color OK');
                             if(parseInt(previousValor)+1 == parseInt(valor)){
-                                console.log('move OK');
                                 return true;
                             }
                         }
                         return false;
                     }
-                    else { return true; }
+                    else { return false; }
                 },
                 drop : function(event,ui){
                     var movedCard = ui.draggable[0]; // Bybebye Jquery
 
                     // La nouvelle derniere carte de l'ancien emplacement devient dropable
-                    droppableStackList(ui.draggable.prev());
-                    // L'ancienne derniere carte du nouvel emplacement devient dropable
+                    
+                    if(movedCard.parentNode.id=='pioche'){
+                        model.delCard(deck,movedCard.getAttribute('data-family'),movedCard.getAttribute('data-valor'));
+                    }
+                    
+                    var previousCard = movedCard.previousElementSibling;
+                    if(previousCard){
+                        var isReturned = previousCard.getAttribute('src').split('/');
+                        isReturned = isReturned[isReturned.length-1];
+                        if(isReturned == 'back.png'){
+                            var family = previousCard.getAttribute('data-family');
+                            var valor = previousCard.getAttribute('data-valor');
+                            previousCard.setAttribute('src','img/cards/'+family+valor+'.jpg');
+                            ui.draggable.prev().addClass('draggable');
+                            solitaire.dragAndDrop(deck);
+                        }
+                        droppableStackList(ui.draggable.prev());
+                    }
+                    else{
+                        droppableEmptyStack(ui.draggable.parent());
+                    }
+                    // L'ancienne derniere carte du nouvel emplacement devient non-dropable
                     $(this).droppable('destroy');
 
 
@@ -96,6 +136,8 @@ var solitaire = {
                     movedCard = this.parentNode.appendChild(movedCard);
                     var top = this.parentNode.childElementCount;
                     UI.setCardsPosition();
+                    
+                    
                 }
             });
         }

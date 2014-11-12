@@ -58,6 +58,15 @@ var model = {
         }
     },
     
+    delCard : function(deck,family,valor){
+        for(var i = 0; i < deck.length; i++){
+            if(deck[i].family == family && deck[i].valor == valor){
+                deck[i] = null;
+                console.log('deleted');
+            }
+        };
+    },
+    
     clickEvent : function(firstClick,self,previousFamily,previousValor,plate,deck,callback){
         var isReturned = self.getAttribute('src').split('/');
         var isReturned = isReturned[isReturned.length-1];

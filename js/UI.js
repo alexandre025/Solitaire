@@ -45,14 +45,16 @@ var UI = {
         var stack = document.getElementById('stack');
         pioche.innerHTML='';
         for (var i = 0; i < deck.length; i++) {
-            family = deck[i].family;
-            valor = deck[i].valor;
-            newCard = document.createElement('img');
-            newCard.classList.add('card');
-            newCard.setAttribute('src','img/cards/back.png');
-            newCard.setAttribute('data-family',family);
-            newCard.setAttribute('data-valor',valor);
-            stack.appendChild(newCard);
+            if(deck[i]){
+                family = deck[i].family;
+                valor = deck[i].valor;
+                newCard = document.createElement('img');
+                newCard.classList.add('card');
+                newCard.setAttribute('src','img/cards/back.png');
+                newCard.setAttribute('data-family',family);
+                newCard.setAttribute('data-valor',valor);
+                stack.appendChild(newCard);
+            }
         };
     },
     clickStack : function(){
