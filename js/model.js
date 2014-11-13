@@ -61,7 +61,7 @@ var model = {
     delCard : function(deck,family,valor){
         for(var i = 0; i < deck.length; i++){
             if(deck[i].family == family && deck[i].valor == valor){
-                deck[i] = null;
+                deck.splice(i, 1);
                 console.log('deleted');
             }
         };

@@ -102,6 +102,11 @@ var solitaire = {
                     var movedCard = ui.draggable[0];
                     UI.setFamilyCardPosition(movedCard);
                     
+                    if(movedCard.parentNode.id=='pioche'){
+                        model.delCard(deck,movedCard.getAttribute('data-family'),movedCard.getAttribute('data-valor'));
+                    }
+                    
+                    
                     var previousCard = movedCard.previousElementSibling;
                     if(previousCard){
                         var isReturned = previousCard.getAttribute('src').split('/');
@@ -150,6 +155,7 @@ var solitaire = {
                     }
                     else { return false; }
                 },
+                
                 drop : function(event,ui){
                     var movedCard = ui.draggable[0]; // Bybebye Jquery
 
