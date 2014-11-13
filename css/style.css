@@ -192,6 +192,23 @@ section p{
     background-color: white;
     position:absolute;
     z-index: 10000;
+    padding: 50px;
+}
+
+#popup h1{
+    font-size: 25px;
+    font-family: "Helvetica";
+    text-transform: uppercase;
+}
+
+#popup p{
+    font-size: 25px;
+    font-family: "Helvetica";
+    text-transform: uppercase;
+}
+
+#chrono{
+    float: left;
 }
 
 #decompte{

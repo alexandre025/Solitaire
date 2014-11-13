@@ -23,6 +23,19 @@ var solitaire = {
                 alert("Êtes vous prêt ?");
                 UI.lancerDecompte(function(){
                     
+                    var sec = 0; 
+                    var min = 0;
+
+                    var interval = setInterval(function(){
+                        sec++;
+                        if(sec == 60){
+                            min++;
+                            sec = 0;
+                        }
+                        
+                        UI.MAJchrono(sec, min);
+                        
+                    },1000);
                 });
             });
         });      

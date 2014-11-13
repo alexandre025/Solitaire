@@ -86,17 +86,26 @@ var UI = {
     lancerDecompte : function(callback){
         var popup = document.getElementById('popup');
         var decompte = document.getElementById('decompte');
-        var cpt = 1;
+        var cpt = 2;
         
         var interval = setInterval(function(){
-            decompte.innerHTML = cpt++;
+            decompte.innerHTML = cpt--;
         }, 1000);
         
         setTimeout(function(){
             popup.style.display = "none";
             clearInterval(interval);
-        }, 4000);
+            callback.call(this);
+        }, 3000);
         
-        callback.call(this);
+        
+    },
+    
+    MAJchrono : function(seconde, minute){
+        var emplacementSec = document.getElementById('sec');
+        var emplacementMin = document.getElementById('min');
+        
+        emplacementSec.innerHTML = seconde;
+        emplacementMin.innerHTML = minute;
     }
 };
