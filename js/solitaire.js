@@ -86,14 +86,11 @@ var solitaire = {
                 accept : function(dragged){
                     
                     var dragged = dragged[0];
-                    console.log(this);
+
                     // Regarde si le contenaire est vide
                     if(this.childNodes.length == 1){
                         
                         if(dragged.getAttribute('data-valor') == "1"){
-                            
-                            this.setAttribute('data-family',dragged.getAttribute('data-family'));
-                            this.setAttribute('data-valor',dragged.getAttribute('data-valor'));
                             return true;
                         }
                         else{
@@ -108,9 +105,7 @@ var solitaire = {
                         var actualFamily = dragged.getAttribute('data-family');
                         var actualValor = parseInt(dragged.getAttribute('data-valor'));
                         
-                        if(previousFamily== actualFamily && (previousValor+1) == actualValor ){
-                            this.setAttribute('data-family',dragged.getAttribute('data-family'));
-                            this.setAttribute('data-valor',dragged.getAttribute('data-valor'));
+                        if(previousFamily == actualFamily && (previousValor+1) == actualValor ){
                             return true;
                             
                         }else{
@@ -119,8 +114,12 @@ var solitaire = {
                     }
                 },
                 drop : function(event,ui){
-        
+                    
                     var movedCard = ui.draggable[0];
+
+                    this.setAttribute('data-family',movedCard.getAttribute('data-family'));
+                    this.setAttribute('data-valor',movedCard.getAttribute('data-valor'));
+                    
                     UI.setFamilyCardPosition(movedCard);
                     
                     if(movedCard.parentNode.id=='pioche'){
@@ -145,6 +144,7 @@ var solitaire = {
                         droppableEmptyStack(ui.draggable.parent());
                     }
                     
+                    $(this).droppable('destroy');
                     movedCard.remove();
                     movedCard = this.appendChild(movedCard);
                     var top = this.parentNode.childElementCount;

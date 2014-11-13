@@ -65,7 +65,6 @@ var UI = {
         var cardTop = document.querySelector('#stack img');
         var family = cardTop.getAttribute('data-family');
         var valor = cardTop.getAttribute('data-valor');
-        console.log(cardTop);
         document.getElementById('stack').removeChild(cardTop);
         cardTop.setAttribute('src','img/cards/'+family+valor+'.jpg');
         cardTop.classList.add('draggable');
@@ -77,8 +76,6 @@ var UI = {
     },
     
     moveCard : function(previousCard, secondCard){
-        console.log(secondCard.parentNode);
-        console.log(previousCard);
         secondCard.parentNode.appendChild(previousCard);
         
     },
