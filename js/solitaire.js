@@ -36,24 +36,50 @@ var solitaire = {
                         UI.MAJchrono(sec, min);
                         
                     },1000);
+                    
+                    //Konami code
+                    var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],  
+                    n = 0;  
+                    $(document).keydown(function (e) {  
+                        if (e.keyCode === k[n++]) {  
+                            if (n === k.length) {  
+                                solitaire.win(interval);
+                                return !1  
+                            }  
+                        }else{
+                            k = 0
+                        }
+                    });  
+
+                    //Click pour tourner pioche
+                    document.getElementById('stack').addEventListener('click',function(){
+                        solitaire.tournerPioche(deck);
+                    },false);
+
+                    //keypress bar d'espace
+                    $(document).keypress(function(event){
+                        if(event.keyCode=="32"){
+                            solitaire.tournerPioche(deck);
+                        }
+                    });	
+
+
+                    solitaire.dragAndDrop(deck); // Initialisation du drag&drop
+                    
                 });
             });
         });      
+    },
+    
+    win : function(interval){
         
-        //Click pour tourner pioche
-        document.getElementById('stack').addEventListener('click',function(){
-            solitaire.tournerPioche(deck);
-        },false);
+        clearInterval(interval);
         
-        //keypress bar d'espace
-        $(document).keypress(function(event){
-			if(event.keyCode=="32"){
-                solitaire.tournerPioche(deck);
-            }
-        });	
-        
-        
-        solitaire.dragAndDrop(deck); // Initialisation du drag&drop
+        var endPanel = document.getElementById('end');
+        var chrono = document.getElementById('chrono').innerHTML;
+        endPanel.style.display="block";
+        endPanel.querySelector('h1').innerHTML = "Gagné" ;
+        endPanel.querySelector('p').innerHTML =  chrono;
     },
     
     //Fonction qui permet de tourner les cartes de la pioche
