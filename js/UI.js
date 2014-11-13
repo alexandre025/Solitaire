@@ -39,6 +39,10 @@ var UI = {
            };
         };        
     },
+    setFamilyCardPosition : function(card){
+        card.style.top = "0px";
+        card.style.left = "0px";
+    },
     initDeck : function(deck){
         var family, valor, newCard;
         var pioche = document.getElementById('pioche');

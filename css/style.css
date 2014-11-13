@@ -149,6 +149,7 @@ section p{
 
 #family>div{
 	display: inline-block;
+    position: relative;
 }
 
 /* TAPIS */
@@ -174,6 +175,11 @@ section p{
 
 #tapis .cards img{
 	position: absolute;
+}
+
+#family .cards img{
+    position: absolute;
+    top:0px
 }
 
 .focus{

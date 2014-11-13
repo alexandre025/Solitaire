@@ -13,7 +13,8 @@ var solitaire = {
                 plate[i][y] = 0;
              }; 
         };
-
+        
+        //Création du tas de carte
         model.createDeck(deck,function(){
 
             model.createPlate(deck,plate,function(){
@@ -21,44 +22,24 @@ var solitaire = {
                 UI.initDeck(deck);
             });
         });      
-    
+        
         document.getElementById('stack').addEventListener('click',function(){
             model.isStackEmpty(function(){
                 UI.initDeck(deck);
             });
             UI.clickStack();
             solitaire.dragAndDrop(deck); // Une nouvelle carte tiré, ajout du drag&drop
-        },false);  
+        },false);
+        
         solitaire.dragAndDrop(deck); // Initialisation du drag&drop
-
-/*
-        var cliquableCards = document.querySelectorAll('.stackList > img, #family > .card');
-        var selectedFamily = null, selectedValor = null, previousCard = null;
-        for(var i = 0; i < cliquableCards.length; i++){
-            cliquableCards[i].addEventListener('click',function(evt){
-                var self = this;
-                model.clickEvent(firstClick,self,selectedFamily,selectedValor,plate,deck,function(family,valor, selectedCard, movable){
-                    selectedFamily = family;
-                    selectedValor = valor;
-                    previousCard = selectedCard;
-                    if(firstClick == true){UI.clickEvent(self); firstClick = false;}
-                    else if(firstClick == false && movable == true){
-                        UI.moveCard(previousCard,self);
-                    }
-                    else if(firstClick == false && movable == false){
-                    // RESET UI
-                    }
-
-                });
-            },false);
-        };
-        */
     },
+    
     dragAndDrop : function(deck){
         $('.draggable').draggable({
             revert : 'invalid',
             zIndex : 100
         });
+        
         function droppableEmptyStack(elem){
             elem.droppable({
                 accept : '.draggable',
@@ -80,6 +61,72 @@ var solitaire = {
                 }
             });
         }
+        
+        //Drop pour les familles
+        function droppableFamilyStack(elem){
+            elem.droppable({
+                accept : function(dragged){
+                    
+                    var dragged = dragged[0];
+                    
+                    // Regarde si le contenaire est vide
+                    if(this.childNodes.length == 1){
+                        
+                        if(dragged.getAttribute('data-valor') == "1"){
+                            
+                            this.setAttribute('data-family',dragged.getAttribute('data-family'));
+                            this.setAttribute('data-valor',dragged.getAttribute('data-valor'));
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                        
+                    }
+                    else{
+                        
+                        var previousFamily = this.getAttribute('data-family');
+                        var previousValor = parseInt(this.getAttribute('data-valor'));
+                        var actualFamily = dragged.getAttribute('data-family');
+                        var actualValor = parseInt(dragged.getAttribute('data-valor'));
+                        
+                        if(previousFamily== actualFamily && (previousValor+1) == actualValor ){
+                            return true;
+                            
+                        }else{
+                            return false;
+                        }
+                    }
+                },
+                drop : function(event,ui){
+                    var movedCard = ui.draggable[0];
+                    UI.setFamilyCardPosition(movedCard);
+                    
+                    var previousCard = movedCard.previousElementSibling;
+                    if(previousCard){
+                        var isReturned = previousCard.getAttribute('src').split('/');
+                        isReturned = isReturned[isReturned.length-1];
+                        if(isReturned == 'back.png'){
+                            var family = previousCard.getAttribute('data-family');
+                            var valor = previousCard.getAttribute('data-valor');
+                            previousCard.setAttribute('src','img/cards/'+family+valor+'.jpg');
+                            ui.draggable.prev().addClass('draggable');
+                            solitaire.dragAndDrop(deck);
+                        }
+                        droppableStackList(ui.draggable.prev());
+                    }
+                    else{
+                        droppableEmptyStack(ui.draggable.parent());
+                    }
+                    
+                    movedCard.remove();
+                    movedCard = this.appendChild(movedCard);
+                    var top = this.parentNode.childElementCount;
+                    
+                }
+            });
+        }
+        
         
         function droppableStackList(elem){
             elem.droppable({ // Ici on ne drop que sur les dernieres cartes des stacks
@@ -128,6 +175,7 @@ var solitaire = {
                     else{
                         droppableEmptyStack(ui.draggable.parent());
                     }
+                    
                     // L'ancienne derniere carte du nouvel emplacement devient non-dropable
                     $(this).droppable('destroy');
 
@@ -137,11 +185,14 @@ var solitaire = {
                     var top = this.parentNode.childElementCount;
                     UI.setCardsPosition();
                     
-                    
                 }
             });
         }
+        
+        //Drop sur les stacklist
         droppableStackList($('.stackList img:last-of-type'));
+        //Drop des familles
+        droppableFamilyStack($('#family .cards'));
     }
 }
 solitaire.init();
