@@ -81,5 +81,22 @@ var UI = {
         console.log(previousCard);
         secondCard.parentNode.appendChild(previousCard);
         
+    },
+    
+    lancerDecompte : function(callback){
+        var popup = document.getElementById('popup');
+        var decompte = document.getElementById('decompte');
+        var cpt = 1;
+        
+        var interval = setInterval(function(){
+            decompte.innerHTML = cpt++;
+        }, 1000);
+        
+        setTimeout(function(){
+            popup.style.display = "none";
+            clearInterval(interval);
+        }, 4000);
+        
+        callback.call(this);
     }
 };

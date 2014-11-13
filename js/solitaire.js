@@ -20,6 +20,10 @@ var solitaire = {
             model.createPlate(deck,plate,function(){
                 UI.initPlate(plate);
                 UI.initDeck(deck);
+                alert("Êtes vous prêt ?");
+                UI.lancerDecompte(function(){
+                    
+                });
             });
         });      
         
@@ -30,6 +34,7 @@ var solitaire = {
             UI.clickStack();
             solitaire.dragAndDrop(deck); // Une nouvelle carte tiré, ajout du drag&drop
         },false);
+        
         
         solitaire.dragAndDrop(deck); // Initialisation du drag&drop
     },
@@ -68,7 +73,7 @@ var solitaire = {
                 accept : function(dragged){
                     
                     var dragged = dragged[0];
-                    
+                    console.log(this);
                     // Regarde si le contenaire est vide
                     if(this.childNodes.length == 1){
                         
@@ -91,6 +96,8 @@ var solitaire = {
                         var actualValor = parseInt(dragged.getAttribute('data-valor'));
                         
                         if(previousFamily== actualFamily && (previousValor+1) == actualValor ){
+                            this.setAttribute('data-family',dragged.getAttribute('data-family'));
+                            this.setAttribute('data-valor',dragged.getAttribute('data-valor'));
                             return true;
                             
                         }else{
@@ -99,6 +106,7 @@ var solitaire = {
                     }
                 },
                 drop : function(event,ui){
+        
                     var movedCard = ui.draggable[0];
                     UI.setFamilyCardPosition(movedCard);
                     
