@@ -40,16 +40,32 @@ var solitaire = {
             });
         });      
         
+        //Click pour tourner pioche
         document.getElementById('stack').addEventListener('click',function(){
-            model.isStackEmpty(function(){
-                UI.initDeck(deck);
-            });
-            UI.clickStack();
-            solitaire.dragAndDrop(deck); // Une nouvelle carte tiré, ajout du drag&drop
+            solitaire.tournerPioche(deck);
         },false);
+        
+        //keypress bar d'espace
+        $(document).keypress(function(event){
+			if(event.keyCode=="32"){
+                solitaire.tournerPioche(deck);
+            }
+        });	
         
         
         solitaire.dragAndDrop(deck); // Initialisation du drag&drop
+    },
+    
+    //Fonction qui permet de tourner les cartes de la pioche
+    tournerPioche : function(deck){
+        
+        model.isStackEmpty(function(){
+            UI.initDeck(deck);
+        });
+
+        UI.clickStack();
+        solitaire.dragAndDrop(deck);
+        
     },
     
     dragAndDrop : function(deck){
