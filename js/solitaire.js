@@ -107,8 +107,19 @@ var solitaire = {
                     $(this).droppable('destroy');
                     var movedCard = ui.draggable[0];
                     
-                    if(movedCard.previousElementSibling){
-                        console.log(ui.draggable.prev());
+                    var previousCard = movedCard.previousElementSibling;
+                    if(previousCard){
+                        
+                        var isReturned = previousCard.getAttribute('src').split('/');
+                        isReturned = isReturned[isReturned.length-1];
+                        if(isReturned == 'back.png'){
+                            var family = previousCard.getAttribute('data-family');
+                            var valor = previousCard.getAttribute('data-valor');
+                            previousCard.setAttribute('src','img/cards/'+family+valor+'.jpg');
+                            ui.draggable.prev().addClass('draggable');
+                            solitaire.dragAndDrop(deck);
+                        }
+                        
                         droppableStackList(ui.draggable.prev());
                     }
                     else{
@@ -204,7 +215,7 @@ var solitaire = {
                     
                     var isReturned = this.getAttribute('src').split('/');
                     isReturned = isReturned[isReturned.length-1];
-                    
+                    console.log('here we are');
                     if(isReturned != 'back.png'){
                         var previousFamily = dragged.getAttribute('data-family');
                         var previousValor = dragged.getAttribute('data-valor');
@@ -230,6 +241,7 @@ var solitaire = {
                     }
                     
                     var previousCard = movedCard.previousElementSibling;
+                    
                     if(previousCard){
                         var isReturned = previousCard.getAttribute('src').split('/');
                         isReturned = isReturned[isReturned.length-1];
@@ -253,10 +265,10 @@ var solitaire = {
                         
                         movedCard.remove();
                         movedCard = this.parentNode.appendChild(movedCard); // Déplacement de la carte dragged
-                        
+                        /*
                         do{
                             //Déplacement de la carte
-                        }while(/*Tant qu'il y a une carte à déplacer apres celle déjà déplacé*/);
+                        }while(Tant qu'il y a une carte à déplacer apres celle déjà déplacé);*/
                     }
                     else{
                         movedCard.remove();
