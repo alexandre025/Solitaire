@@ -108,6 +108,7 @@ var solitaire = {
                     var movedCard = ui.draggable[0];
                     
                     if(movedCard.previousElementSibling){
+                        console.log(ui.draggable.prev());
                         droppableStackList(ui.draggable.prev());
                     }
                     else{
@@ -116,7 +117,7 @@ var solitaire = {
                     
                     movedCard.remove();
                     movedCard = this.appendChild(movedCard);
-                    var top = this.parentNode.childElementCount;
+                    droppableStackList($('.stackList img:last-of-type'));
                     UI.setCardsPosition();
                 }
             });
@@ -189,7 +190,7 @@ var solitaire = {
                     $(this).droppable('destroy');
                     movedCard.remove();
                     movedCard = this.appendChild(movedCard);
-                    var top = this.parentNode.childElementCount;
+                    droppableStackList($('.stackList img:last-of-type'));
                     
                 }
             });
@@ -248,12 +249,21 @@ var solitaire = {
                     // L'ancienne derniere carte du nouvel emplacement devient non-dropable
                     $(this).droppable('destroy');
 
-
-                    movedCard.remove();
-                    movedCard = this.parentNode.appendChild(movedCard);
-                    var top = this.parentNode.childElementCount;
-                    UI.setCardsPosition();
-                    
+                    if(movedCard.nextElementSibling){ // Il y a des éléments à déplacer après la carte
+                        
+                        movedCard.remove();
+                        movedCard = this.parentNode.appendChild(movedCard); // Déplacement de la carte dragged
+                        
+                        do{
+                            //Déplacement de la carte
+                        }while(/*Tant qu'il y a une carte à déplacer apres celle déjà déplacé*/);
+                    }
+                    else{
+                        movedCard.remove();
+                        movedCard = this.parentNode.appendChild(movedCard);
+                    }
+                    droppableStackList($('.stackList img:last-of-type'));
+                    UI.setCardsPosition();   
                 }
             });
         }
