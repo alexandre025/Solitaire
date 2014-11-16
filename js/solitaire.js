@@ -254,9 +254,10 @@ var solitaire = {
                         movedCard.remove();
                         movedCard = this.parentNode.appendChild(movedCard); // Déplacement de la carte dragged
                         
-                        do{
-                            //Déplacement de la carte
-                        }while(/*Tant qu'il y a une carte à déplacer apres celle déjà déplacé*/);
+//                        do{
+//                            //Déplacement de la carte
+//                        }while(/*Tant qu'il y a une carte à déplacer apres celle déjà déplacé*/);
+                        
                     }
                     else{
                         movedCard.remove();
