@@ -2,40 +2,38 @@
 <html lang="fr">
 
 	<head>
-	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	  <title>Solitaire</title>
-	  <meta name="description" content="#" />
-	  <link rel="shortcut icon" type="image/png" href="img/favicon.png">
-	  <link rel="stylesheet" href="css/style.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Solitaire</title>
+		<meta name="description" content="#" />
+		<link rel="shortcut icon" type="image/png" href="img/favicon.png">
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 
 	<body>
 		<header>
-		    <div id="chrono"><p><span id="min">0</span> : <span id="sec">0</span></p></div>
+			<div id="chrono"><p><span>Time</span><span id="min">0 min</span><span id="sec">0 sec</span></p></div>
 			<h1>Solitaire</h1>
 			<img width="30" src="img/logo.png">
 			<a href=''>Restart</a>
 		</header>
 		<section id="popup">
-		    <h1>A vous de jouer dans</h1>
-		    <p id="decompte">3</p>
+			<div>
+				<div>
+					<h3>Êtes vous prêts à jouer ?</h3>
+					<span id="decompte">PRÊT !</span>
+				</div>
+			</div>
 		</section>
-        
-        <section id="end">
-		    <h1></h1>
-		    <p></p>
-		</section>
-		
-		<section>
+		<section id="error">
 			<p>Vous n'avez plus la possibilité de jouer. Retentez votre chance en cliquant sur le bouton "Restart".</p>
 		</section>
 		<div id="board">	
 
 			<div id="top">
 				<div id="stack" class="cards">
-
+					<div id="round"></div>
 				</div>
-                
+
 				<div id="pioche" class="cards">
 				</div>
 
@@ -54,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div id="tapis">
 
 				<div class="stackList cards">
@@ -89,12 +87,12 @@
 		</div>
 
 		<!-- Scripts JS - Fonctionnement du Solitaire -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-ui.min.js"></script>
-    	
-    	<script type="text/javascript" src="js/model.js"></script>
-    	<script type="text/javascript" src="js/UI.js"></script>
-        <script type="text/javascript" src="js/solitaire.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+		<script type="text/javascript" src="js/model.js"></script>
+		<script type="text/javascript" src="js/UI.js"></script>
+		<script type="text/javascript" src="js/solitaire.js"></script>
 
 	</body>
 

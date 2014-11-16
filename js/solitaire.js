@@ -1,5 +1,6 @@
 'use.strict';
 
+var interval;
 
 var solitaire = {
     
@@ -20,22 +21,25 @@ var solitaire = {
             model.createPlate(deck,plate,function(){
                 UI.initPlate(plate);
                 UI.initDeck(deck);
-                alert("Êtes vous prêt ?");
-                UI.lancerDecompte(function(){
+                document.getElementById('decompte').addEventListener('click', function(){
                     
-                    var sec = 0; 
-                    var min = 0;
+                    UI.lancerDecompte(function(){
+                        
+                        var sec = 0; 
+                        var min = 0;
 
-                    var interval = setInterval(function(){
-                        sec++;
-                        if(sec == 60){
-                            min++;
-                            sec = 0;
-                        }
-                        
-                        UI.MAJchrono(sec, min);
-                        
-                    },1000);
+                        interval = setInterval(function(){
+                            sec++;
+                            if(sec == 60){
+                                min++;
+                                sec = 0;
+                            }
+
+                            UI.MAJchrono(sec, min);
+
+                        },1000);      
+                }, false);
+
                     
                     //Konami code
                     var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],  
@@ -43,7 +47,7 @@ var solitaire = {
                     $(document).keydown(function (e) {  
                         if (e.keyCode === k[n++]) {  
                             if (n === k.length) {  
-                                solitaire.win(interval);
+                                solitaire.win();
                                 return !1  
                             }  
                         }else{
@@ -71,15 +75,15 @@ var solitaire = {
         });      
     },
     
-    win : function(interval){
-        
+    win : function(){
         clearInterval(interval);
-        
-        var endPanel = document.getElementById('end');
-        var chrono = document.getElementById('chrono').innerHTML;
+        var endPanel = document.getElementById('popup');
+        var decompte = document.getElementById('decompte');
+        var min = document.getElementById('min').innerHTML;
+        var sec = document.getElementById('sec').innerHTML;
         endPanel.style.display="block";
-        endPanel.querySelector('h1').innerHTML = "Gagné" ;
-        endPanel.querySelector('p').innerHTML =  chrono;
+        endPanel.querySelector('h3').innerHTML = "Gagné !" ;
+        decompte.innerHTML = "vous avez mis : "+ min +" minutes et "+sec+" secondes.";
     },
     
     //Fonction qui permet de tourner les cartes de la pioche
@@ -255,9 +259,8 @@ var solitaire = {
                         movedCard = this.parentNode.appendChild(movedCard); // Déplacement de la carte dragged
                         
 //                        do{
-//                            //Déplacement de la carte
-//                        }while(/*Tant qu'il y a une carte à déplacer apres celle déjà déplacé*/);
-                        
+//                            Déplacement de la carte
+//                        }while(Tant qu'il y a une carte à déplacer apres celle déjà déplacé);
                     }
                     else{
                         movedCard.remove();

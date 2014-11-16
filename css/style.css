@@ -1,13 +1,13 @@
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 @font-face {
-font-family: "font";
-src: url("./../font/font.ttf");
-font-weight: normal;
-font-style: normal;
+	font-family: "font";
+	src: url("./../font/font.ttf");
+	font-weight: normal;
+	font-style: normal;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -39,6 +39,8 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	background-image: url('../img/background.png');
+	overflow-y: hidden;
+	min-height: 600px;
 }
 ol, ul {
 	list-style: none;
@@ -77,6 +79,28 @@ header h1 {
 	margin: 0 0 0 -40px;
 }
 
+#chrono
+{
+	font-family: arial;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: .7em;
+	position: absolute;
+	top: 19px;
+	left: 11px;
+}
+
+#chrono span
+{
+	background-color: #333333;
+	color: whitesmoke;
+	-webkit-transition:all 200ms ease-in-out;
+	-moz-transition:all 200ms ease-in-out;
+	transition:all 200ms ease-in-out;
+	margin: 0 0 0 2px;
+	padding: 5px 10px 5px 10px;
+}
+
 header a{
 	background-color: #333333;
 	color: whitesmoke;
@@ -105,14 +129,15 @@ header img{
 	margin: 0 0 0 33px;
 }
 
-section{
+#error{
 	width: 100%;
 	height: 30px;
 	text-align: center;
 	background-color: rgba(162, 142, 61, .4);
+	display: none;
 }
 
-section p{
+#error p{
 	line-height: 32px;
 	font-family: arial;
 	font-size: .8em;
@@ -122,8 +147,8 @@ section p{
 
 #board {
 	width: 960px;
-	margin: auto;
-	margin-top: 10px;
+	margin: 20px auto;
+	padding: 0 0 0 11px;
 }
 
 /* top */
@@ -137,6 +162,12 @@ section p{
 
 #stack{
 	position: relative;
+	margin: 0 0 0 5px;
+}
+
+#pioche
+{
+	margin: 0 0 0 10px;
 }
 
 #stack img, #pioche img{
@@ -145,11 +176,13 @@ section p{
 
 #family{
 	float: right;
+	margin: 0 21px 0 0;
 }
 
 #family>div{
 	display: inline-block;
-    position: relative;
+	position: relative;
+	margin: 0 0 0 10px;
 }
 
 /* TAPIS */
@@ -166,6 +199,17 @@ section p{
 	border : 2px solid rgba(0, 0, 0, .5);
 	border-radius: 5px;
 }
+#round {
+	width: 50px;
+	height: 50px;
+	border : 10px solid rgba(0, 0, 0, .5);
+	border-radius: 100%;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -25px 0 0 -25px;
+}
 
 #tapis .cards{
 	position: relative;
@@ -178,8 +222,8 @@ section p{
 }
 
 #family .cards img{
-    position: absolute;
-    top:0px
+	position: absolute;
+	top:0px
 }
 
 .focus{
@@ -187,42 +231,53 @@ section p{
 }
 
 #popup{
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    position:absolute;
-    z-index: 10000;
-    padding: 50px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .6);
+	position:absolute;
+	z-index: 10000;
+	text-align: center;
+}
+#popup div
+{
+	background-color: whitesmoke;
+	width: 400px;
+	height: 170px;
+	font-family: arial;
+	font-weight: bold;
+	text-transform: uppercase;
+
+	position: relative;
+	margin: 50px auto;
+}
+#popup div span
+{
+	background-color: rgba(162, 142, 61, .6);
+	color: white;
+	cursor: pointer;
+	width: 100%;
+
+	display: block;
+	position: absolute;
+	bottom: 0;
+	padding: 13px;
+}
+#popup div span:hover
+{
+	background-color: rgba(162, 142, 61, .4);
 }
 
-#end{
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    position:absolute;
-    z-index: 10000;
-    padding: 50px;
-    display: none;
-}
-
-#popup h1{
-    font-size: 25px;
-    font-family: "Helvetica";
-    text-transform: uppercase;
-}
-
-#popup p{
-    font-size: 25px;
-    font-family: "Helvetica";
-    text-transform: uppercase;
+#popup h3
+{
+	padding: 65px 0 0 0;
 }
 
 #chrono{
-    float: left;
+	float: left;
 }
 
 #decompte{
-    color: black;
+	color: black;
 }
 
 /* DRAG */

@@ -83,8 +83,8 @@ var UI = {
     lancerDecompte : function(callback){
         var popup = document.getElementById('popup');
         var decompte = document.getElementById('decompte');
+        decompte.innerHTML = 3;
         var cpt = 2;
-        
         var interval = setInterval(function(){
             decompte.innerHTML = cpt--;
         }, 1000);
@@ -101,8 +101,8 @@ var UI = {
     MAJchrono : function(seconde, minute){
         var emplacementSec = document.getElementById('sec');
         var emplacementMin = document.getElementById('min');
-        
-        emplacementSec.innerHTML = seconde;
-        emplacementMin.innerHTML = minute;
+
+        emplacementSec.innerHTML = seconde + ' sec';
+        emplacementMin.innerHTML = minute  + ' min';
     }
 };
